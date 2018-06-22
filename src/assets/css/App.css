@@ -7,6 +7,21 @@ body{
   margin: 0px;
   background-color: #353535;
 }
+.primary{
+  background-color: white;
+  border: 0px;
+  height: 30px;
+  width: 60px;
+  font-size: 14px;
+}
+.secondary{
+  background-color: #188FFF;
+  border: 0px;
+  height: 30px;
+  width: 60px;
+  font-size: 14px;
+  color: white;
+}
 .title-bar{
   -webkit-user-select: none;
   -webkit-app-region: drag;
@@ -19,4 +34,12 @@ body{
 .title-bar > p{
   margin: 0px;
   color: white;
+}
+.home-page{
+  margin-left: 330px;
+  margin-right: 10px;
+  overflow: scroll;
+}
+.code-block{
+  margin-top: 10px;
 }

@@ -39,6 +39,9 @@
 .sidebar-panel-snippet-container:hover{
     background-color: rgb(91, 91, 91);
 }
+.sidebar-panel-snippet-container.active{
+    background-color: rgb(91, 91, 91);
+}
 .sidebar-panel-snippet-container > p{
     margin: 0px;
     margin-left: 10px;

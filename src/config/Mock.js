@@ -9,15 +9,40 @@ export const mockPanels = [
                 panelId: 0,
                 snippetId: 0,
                 title: 'RN Asset Upload',
-                code: '//This is a comment',
-                icon: 'ion-logo-javascript'
+                code: `import React, { Component } from 'react';
+class ReactComponent extends Component {
+    
+    constructor() {
+        super()
+    }
+    render() {
+        return (
+            <div>
+                \`I'm a backtick!\`
+            </div>
+        );
+    }
+}
+export default ReactComponent`,
+                icon: 'ion-logo-javascript',
+                language: 'jsx'
             },
             {
                 panelId: 0,
                 snippetId: 1,
                 title: 'Futch Requests',
-                code: '//This is a comment',
-                icon: 'ion-logo-javascript'
+                code: 
+`/* HelloWorld.java
+*/
+
+    public class HelloWorld
+    {
+        public static void main(String[] args) {
+        System.out.println("Hello World!");
+    }
+}`,
+                icon: 'ion-logo-javascript',
+                language: 'java'
             }
         ]
     },
@@ -67,8 +92,10 @@ export const mockPanels = [
                 panelId: 2,
                 snippetId: 6,
                 title: 'General Setup',
-                code: '//This is a comment',
-                icon: 'ion-logo-python'
+                code: `name = raw_input('What is your name?\\n')
+print 'Hi, %s.' % name`,
+                icon: 'ion-logo-python',
+                language: 'python'
             },
         ]
     },
@@ -83,35 +110,40 @@ export const mockPanels = [
                 snippetId: 7,
                 title: 'Express setup',
                 code: '//This is a comment',
-                icon: 'ion-logo-javascript'
+                icon: 'ion-logo-javascript',
+                language: 'javascript'
             },
             {
                 panelId: 3,
                 snippetId: 8,
                 title: 'Express middleware',
                 code: '//This is a comment',
-                icon: 'ion-logo-javascript'
+                icon: 'ion-logo-javascript',
+                language: 'javascript'
             },
             {
                 panelId: 3,
                 snippetId: 9,
                 title: 'Express routing',
                 code: '//This is a comment',
-                icon: 'ion-logo-javascript'
+                icon: 'ion-logo-javascript',
+                language: 'javascript'
             },
             {
                 panelId: 3,
                 snippetId: 10,
                 title: 'Sails JS boiler',
                 code: '//This is a comment',
-                icon: 'ion-logo-javascript'
+                icon: 'ion-logo-javascript',
+                language: 'javascript'
             },
             {
                 panelId: 3,
                 snippetId: 11,
                 title: 'Node ImageMagick',
                 code: '//This is a comment',
-                icon: 'ion-logo-javascript'
+                icon: 'ion-logo-javascript',
+                language: 'javascript'
             },
         ]
     }

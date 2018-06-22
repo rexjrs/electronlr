@@ -17,9 +17,17 @@ export default class Panel extends Component {
         ipcRenderer.send('ctx-snippet', e.pageX, e.pageY)
     }
     renderSnippet() {
+        const viewSnippet = (e, snippetId) => {
+            e.stopPropagation()
+            this.props.app.setState({ snippetViewing: { panelId: this.props.id, snippetId: snippetId } })
+        }
         return this.props.data.map(((item, index) => {
             return (
-                <div onContextMenu={this.ctxMenuSnippet} key={item.snippetId} className="sidebar-panel-snippet-container">
+                <div
+                    onClick={(e) => viewSnippet(e, item.snippetId)}
+                    onContextMenu={this.ctxMenuSnippet}
+                    key={item.snippetId}
+                    className={`sidebar-panel-snippet-container ${this.props.snippetViewing.snippetId === item.snippetId ? 'active' : ''}`}>
                     <i className={`icon ${item.icon} snippet-icon`}></i>
                     <p>{item.title}</p>
                 </div>
@@ -52,7 +60,6 @@ export default class Panel extends Component {
                     <p>{this.props.title}</p>
                 </div>
                 <div
-                    onClick={(e)=>e.stopPropagation()}
                     style={{ height: this.props.expanded ? (this.props.data.length * 24) + 5 : 0 }}
                     className="sidebar-panel-snippets">
                     {this.renderSnippet()}

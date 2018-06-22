@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const BabiliPlugin = require('babili-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -48,6 +49,9 @@ module.exports = {
   },
   target: 'electron-renderer',
   plugins: [
+    new CopyWebpackPlugin([
+      { from: 'public/assets', to: 'assets' }
+    ]),
     new HtmlWebpackPlugin({
       template: helpers.root('public/index.html'),
       inject: 'body'

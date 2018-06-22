@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { spawn } = require('child_process');
 const helpers = require('./config/helpers');
@@ -45,6 +46,9 @@ module.exports = {
   },
   target: 'electron-renderer',
   plugins: [
+    new CopyWebpackPlugin([
+      { from: 'public/assets', to: 'assets' }
+    ]),
     new HtmlWebpackPlugin({
       template: helpers.root('public/index.html'),
       inject: 'body'

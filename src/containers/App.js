@@ -1,5 +1,7 @@
 import '../assets/css/App.css';
 import '../assets/css/icons/Icons.css'
+import '../assets/css/codemirror.css'
+import '../assets/css/monokai.css'
 import React, { Component } from 'react';
 import { Route, HashRouter } from 'react-router-dom'
 import Home from './pages/Home'

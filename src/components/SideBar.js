@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
-import { mockPanels } from '../config/Mock'
 import Panel from './sidebar/Panel'
 import '../assets/css/sidebar/Sidebar.css'
 
 export default class SideBar extends Component {
-    constructor() {
-        super()
-        this.state = {
-            panels: mockPanels,
-        }
+    constructor(props) {
+        super(props)
         this.dragPositionEnd = null
         this.expandDespand = this.expandDespand.bind(this)
         this.draggingOverPanel = this.draggingOverPanel.bind(this)
@@ -18,7 +14,7 @@ export default class SideBar extends Component {
         this.dragPositionEnd = positionOver
     }
     dragEnd(positionStart) {
-        const panels = this.state.panels.map((item) => {
+        const panels = this.props.panels.map((item) => {
             if (item.position === positionStart) {
                 return {
                     ...item,
@@ -34,10 +30,10 @@ export default class SideBar extends Component {
                 }
             }
         })
-        this.setState({ panels: panels })
+        this.props.app.setState({ panels: panels })
     }
     expandDespand(id) {
-        const panels = this.state.panels.map((item) => {
+        const panels = this.props.panels.map((item) => {
             if (item.panelId === id) {
                 return {
                     ...item,
@@ -46,14 +42,15 @@ export default class SideBar extends Component {
             }
             return item
         })
-        this.setState({
+        this.props.app.setState({
             panels: panels
         })
     }
     renderPanels() {
-        const panels = this.state.panels.map((item, index) => {
+        const panels = this.props.panels.map((item, index) => {
             return (
                 <Panel
+                    app={this.props.app}
                     key={item.panelId}
                     id={item.panelId}
                     title={item.title}
@@ -63,6 +60,7 @@ export default class SideBar extends Component {
                     draggingOverPanel={this.draggingOverPanel}
                     dragEnd={this.dragEnd}
                     position={item.position}
+                    snippetViewing={this.props.snippetViewing}
                 />
             )
         })
