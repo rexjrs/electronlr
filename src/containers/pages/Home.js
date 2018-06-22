@@ -8,8 +8,7 @@ class Home extends Component {
     render() {
         return (
             <div className="home-page">
-                <p>Imagine if Lightrocket's Dashboard came as REAL software</p>
-                <button onClick={() => this.props.history.push('/no')}>Read more...</button>
+            
             </div>
         );
     }

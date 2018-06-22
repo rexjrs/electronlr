@@ -1,4 +1,5 @@
 import '../assets/css/App.css';
+import '../assets/css/icons/Icons.css'
 import React, { Component } from 'react';
 import { Route, HashRouter } from 'react-router-dom'
 import Home from './pages/Home'
@@ -10,8 +11,8 @@ class App extends Component {
         super()
     }
     componentDidMount() {
-        ipcRenderer.on('upload-assets', (event) => {
-            alert('yes this is real software')
+        ipcRenderer.on('new-snippet', (event) => {
+
         });
     }
     render() {

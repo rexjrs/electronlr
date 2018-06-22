@@ -1,7 +1,10 @@
 'use strict';
 
 // Import parts of electron to use
-const { app, BrowserWindow, Menu } = require('electron');
+const { app, BrowserWindow, Menu, ipcMain } = require('electron');
+const AppMenu = require('./src/config/Menu').AppMenu
+const ContextMenu = require('./src/config/Menu').ContextMenus
+let screen = null
 const path = require('path')
 const url = require('url')
 // Keep a global reference of the window object, if you don't, the window will
@@ -17,35 +20,17 @@ if (process.defaultApp || /[\\/]electron-prebuilt[\\/]/.test(process.execPath) |
 function createWindow() {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 1024, height: 768, show: false,
+    useContentSize: true,
+    height: 700,
+    titleBarStyle: 'hiddenInset',
+    width: 1160,
+    minHeight: 500,
+    minWidth: 900,
   });
+  //Create the App Menu 
+  Menu.setApplicationMenu(AppMenu(mainWindow))
+  ContextMenu(mainWindow)
 
-  const template = [
-    {
-      label: 'LightRocket',
-      submenu: [
-        {
-          label: 'Quit',
-          click: () => {
-            app.quit()
-          }
-        }
-      ]
-    },
-    {
-      label: 'File',
-      submenu: [
-        {
-          label: 'Upload Assets',
-          click: () => {
-            mainWindow.webContents.send('upload-assets');
-          }
-        }
-      ]
-    }
-  ]
-  const menus = Menu.buildFromTemplate(template)
-  Menu.setApplicationMenu(menus)
 
   // and load the index.html of the app.
   let indexPath;
@@ -66,7 +51,8 @@ function createWindow() {
   mainWindow.loadURL(indexPath);
 
   // Don't show until we are ready and loaded
-  mainWindow.once('ready-to-show', () => {
+  mainWindow.webContents.on('did-finish-load', function () {
+    screen = require('electron').screen;
     mainWindow.show();
     // Open the DevTools automatically if developing
     if (dev) {
@@ -76,31 +62,32 @@ function createWindow() {
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {
-    // Dereference the window object, usually you would store windows
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
     mainWindow = null;
   });
 }
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
 app.on('ready', createWindow);
 
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
-  // On macOS it is common for applications and their menu bar
-  // to stay active until the user quits explicitly with Cmd + Q
   if (process.platform !== 'darwin') {
     app.quit();
   }
 });
 
 app.on('activate', () => {
-  // On macOS it's common to re-create a window in the app when the
-  // dock icon is clicked and there are no other windows open.
   if (mainWindow === null) {
     createWindow();
+  }
+});
+
+// Title Bar Behavior
+ipcMain.on('maxminwindow', (event) => {
+  const screenArea = screen.getPrimaryDisplay().workArea
+  const windowArea = mainWindow.getSize()
+  if (screenArea.width == windowArea[0] && screenArea.height == windowArea[1]) {
+    mainWindow.setSize(1160, 700, true)
+  } else {
+    mainWindow.maximize()
   }
 });

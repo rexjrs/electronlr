@@ -3,25 +3,20 @@ h1 {
   font-weight: 200;
 }
 body{
+  font-family: 'Lato', sans-serif;
   margin: 0px;
+  background-color: #353535;
 }
-.home-page, .other-page{
-  background-color: white;
-  width: 100%;
-  height: 100vh;
+.title-bar{
+  -webkit-user-select: none;
+  -webkit-app-region: drag;
+  height: 40px;
+  background-color: #232323;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: black;
-  font-size: 40px;
-  flex-direction: column;
 }
-.home-page > button, .other-page > button{
-  background-color: #188FFF;
-  padding: 10px;
-  border: 0px;
+.title-bar > p{
+  margin: 0px;
   color: white;
-  font-size: 20px;
-  border-radius: 3px;
-  cursor: pointer;
 }

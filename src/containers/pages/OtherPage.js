@@ -8,8 +8,7 @@ class OtherPage extends Component {
     render() {
         return (
             <div className="other-page">
-                It's possible thanks to Electron + React. Possible plan for 2019?
-                <button onClick={() => this.props.history.push('/')}>Back</button>
+
             </div>
         );
     }
