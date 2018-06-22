@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 import Mousetrap from 'mousetrap'
 import { Controlled as CodeMirror } from 'react-codemirror2'
-import 'codemirror/mode/xml/xml'
-import 'codemirror/mode/javascript/javascript'
-import 'codemirror/mode/python/python'
-import 'codemirror/mode/jsx/jsx'
 import { clipboard } from 'electron'
 import Wrapper from '../Wrapper'
 
@@ -13,24 +9,26 @@ class Home extends Component {
         super()
         this.state = {
             editing: false,
-            selectedSnippet: {}
+            selectedSnippet: {
+
+            }
         }
     }
     componentDidMount() {
-        // Mousetrap.prototype.stopCallback = () => {
-        //     return false
-        // }
-        // Mousetrap(document.getElementById('pre-block')).bind(['command+c', 'ctrl+c'], () => {
-        //     const selection = window.getSelection().toString()
-        //     if (selection !== '') {
-        //         clipboard.writeText(selection)
-        //     }
-        //     return false
-        // });
-        // Mousetrap(document.getElementById('pre-block')).bind(['command+v', 'ctrl+v'], () => {
-        //     document.execCommand('paste')
-        //     return false
-        // });
+        Mousetrap.prototype.stopCallback = () => {
+            return false
+        }
+        Mousetrap(document.getElementById('code-block')).bind(['command+c', 'ctrl+c'], () => {
+            const selection = window.getSelection().toString()
+            if (selection !== '') {
+                clipboard.writeText(selection)
+            }
+            return false
+        });
+        Mousetrap(document.getElementById('code-block')).bind(['command+v', 'ctrl+v'], () => {
+            document.execCommand('paste')
+            return false
+        });
     }
     componentWillReceiveProps(nextProps) {
         let selectedSnippet
@@ -52,8 +50,9 @@ class Home extends Component {
     render() {
         return (
             <div className="home-page">
-                {this.state.selectedSnippet.code &&
+                {this.state.selectedSnippet && this.state.selectedSnippet.code &&
                     <CodeMirror
+                        id="code-block"
                         onBlur={() => {
                             const newPanels = this.props.panels.map((panel) => {
                                 if (panel.panelId === this.props.snippetViewing.panelId) {

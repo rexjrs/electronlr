@@ -5,10 +5,21 @@ import '../assets/css/sidebar/Sidebar.css'
 export default class SideBar extends Component {
     constructor(props) {
         super(props)
+        this.state = {
+            whatIsDragging: 'none'
+        }
         this.dragPositionEnd = null
         this.expandDespand = this.expandDespand.bind(this)
         this.draggingOverPanel = this.draggingOverPanel.bind(this)
         this.dragEnd = this.dragEnd.bind(this)
+        this.thisIsDragging = this.thisIsDragging.bind(this)
+    }
+    thisIsDragging(type) {
+        if (type !== this.state.whatIsDragging) {
+            this.setState({
+                whatIsDragging: type
+            })
+        }
     }
     draggingOverPanel(positionOver) {
         this.dragPositionEnd = positionOver
@@ -23,10 +34,10 @@ export default class SideBar extends Component {
             }
             if (item.position < this.dragPositionEnd) {
                 return item
-            }else{
+            } else {
                 return {
                     ...item,
-                    position: item.position+1
+                    position: item.position + 1
                 }
             }
         })
@@ -61,6 +72,8 @@ export default class SideBar extends Component {
                     dragEnd={this.dragEnd}
                     position={item.position}
                     snippetViewing={this.props.snippetViewing}
+                    thisIsDragging={this.thisIsDragging}
+                    whatIsDragging={this.state.whatIsDragging}
                 />
             )
         })

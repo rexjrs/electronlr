@@ -25,6 +25,13 @@
     margin: 0;
     color: rgb(208, 208, 208);
 }
+.ion-logo-javascript{
+    font-size: 16px !important;
+    color: yellow !important;
+}
+.ion-logo-python{
+    color: #3671a2 !important;
+}
 .snippet-icon{
     color: white;
     font-size: 20px;
@@ -35,6 +42,7 @@
     flex-direction: row;
     align-items: center;
     padding-left: 20px;
+    height: 23px;
 }
 .sidebar-panel-snippet-container:hover{
     background-color: rgb(91, 91, 91);
@@ -49,7 +57,7 @@
     font-size: 13px;
 }
 .sidebar-panel-snippets{
-    transition: all 0.2s ease-in;
+    transition: all 0.2s;
     overflow: hidden;
 }
 .sidebar-panel-drop{

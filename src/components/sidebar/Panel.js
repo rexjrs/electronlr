@@ -9,6 +9,7 @@ export default class Panel extends Component {
         }
         this.ctxMenuPanel = this.ctxMenuPanel.bind(this)
         this.ctxMenuSnippet = this.ctxMenuSnippet.bind(this)
+        this.draggingPanel = false
     }
     ctxMenuPanel(e) {
         ipcRenderer.send('ctx-panel', e.pageX, e.pageY)
@@ -24,6 +25,7 @@ export default class Panel extends Component {
         return this.props.data.map(((item, index) => {
             return (
                 <div
+                    draggable={true}
                     onClick={(e) => viewSnippet(e, item.snippetId)}
                     onContextMenu={this.ctxMenuSnippet}
                     key={item.snippetId}
@@ -40,6 +42,7 @@ export default class Panel extends Component {
                 <div className="sidebar-panel-drop" style={{ backgroundColor: this.state.dropZone ? 'rgb(159, 159, 159)' : 'transparent' }}></div>
                 <div
                     onDragEnd={() => {
+                        this.props.thisIsDragging('none')
                         this.props.dragEnd(this.props.position)
                     }}
                     onDragLeave={() => {
@@ -49,10 +52,14 @@ export default class Panel extends Component {
                         }
                     }}
                     onDragOver={() => {
+                        if(this.props.whatIsDragging !== 'panel') return
                         if (!this.state.dropZone) {
                             this.props.draggingOverPanel(this.props.position)
                             this.setState({ dropZone: true })
                         }
+                    }}
+                    onDrag={() => {
+                        this.props.thisIsDragging('panel')
                     }}
                     draggable={true}
                     onContextMenu={this.ctxMenuPanel}
